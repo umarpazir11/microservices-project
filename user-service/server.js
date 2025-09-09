@@ -1,7 +1,9 @@
 // user-service/server.js
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = 3001; // This service will run on port 3001
+// The new, better line
+const PORT = process.env.PORT || 3001; // Use the env variable, or 3001 as a default
 
 // A simple, fake database of users
 const users = {
