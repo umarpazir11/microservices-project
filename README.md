@@ -23,3 +23,15 @@ The key components are:
 ---
 
 ## Technology Stack
+
+Backend:           Node.js, Express.js
+
+Containerization:    Docker
+
+Orchestration:       Kubernetes
+
+Database:            PostgreSQL
+
+Messaging:           RabbitMQ
+
+Version Control:     Git & GitHub
