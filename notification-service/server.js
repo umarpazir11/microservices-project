@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 
-const RABBITMQ_URL = process.env.RBITMQ_URL || 'amqp://guest:guest@rabbitmq';
+const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://guest:guest@rabbitmq-service';
 const QUEUE_NAME = 'order_created';
 
 // ** NEW FUNCTION TO HANDLE RETRIES **

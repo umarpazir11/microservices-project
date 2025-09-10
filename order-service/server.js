@@ -4,7 +4,7 @@ const amqp = require('amqplib');
 const app = express();
 app.use(express.json());
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://guest:guest@rabbitmq';
+const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://guest:guest@rabbitmq-service';
 const QUEUE_NAME = 'order_created';
 let amqpChannel = null; // Keep a channel open
 
