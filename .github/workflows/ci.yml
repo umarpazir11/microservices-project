@@ -1,23 +1,27 @@
 # .github/workflows/ci.yml
 
-# 1. Give your workflow a name
-name: Learning GitHub Actions
+name: Build and Deploy Application
 
-# 2. Define the event that triggers the workflow
 on:
   push:
     branches:
+      - main
+  pull_request:
+    branches:
       - feature/ci-pipeline
 
-# 3. Define the jobs that the workflow will run
 jobs:
-  # Define a single job named "hello-world-job"
-  hello-world-job:
-    # 4. Specify the runner (virtual machine) to use
+  build-docker-image:
+    name: Build Docker Image
     runs-on: ubuntu-latest
 
-    # 5. Define the steps to be executed
     steps:
-      # A single step to print a message
-      - name: Say Hello
-        run: echo "Hello, World! I'm running my first GitHub Actions workflow!"
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build the User Service image
+        run: |
+          docker build -t user-service-image ./user-service
