@@ -1,12 +1,46 @@
-version: '3.8'
 
 services:
+  api-gateway: # New Service
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+
   user-service:
     build: ./user-service
-    ports:
-      - "3001:3001"
+    environment:
+      - DATABASE_URL=postgres://myuser:mypassword@db:5432/mydatabase
+    depends_on:
+      - db
+    # No ports needed here anymore, as it's only accessed internally
 
   order-service:
     build: ./order-service
+    environment: # Add environment variable for RabbitMQ
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq
+    depends_on: # Make sure it starts after RabbitMQ
+      - rabbitmq
+
+  notification-service: # New Notification Service
+    build: ./notification-service
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq
+    depends_on:
+      - rabbitmq
+
+  db: # New PostgreSQL Database Service
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq: # New RabbitMQ Service
+    image: rabbitmq:3-management
     ports:
-      - "3002:3002"
+      - "15672:15672" # Management UI
+      - "5672:5672"   # AMQP protocol
+
+volumes: # New Volume for persistent data
+  postgres_data:
