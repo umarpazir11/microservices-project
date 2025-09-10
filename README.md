@@ -1,7 +1,8 @@
-Project Overview
-This project is a complete, cloud-native application built from the ground up to demonstrate a modern microservices architecture. It simulates a simple e-commerce backend, handling users and orders through a collection of independent, containerized services.
+Microservices E-Commerce Backend Project
+A complete, cloud-native application built from the ground up to demonstrate a modern microservices architecture, containerized with Docker, and deployed to Kubernetes.
 
-The entire application is designed to be run and managed by Kubernetes, showcasing a full development-to-deployment workflow using industry-standard tools and practices.
+Project Overview
+This project simulates a simple e-commerce backend, handling users and orders through a collection of independent, containerized services. The entire application is designed to be run and managed by Kubernetes, showcasing a full development-to-deployment workflow using industry-standard tools and practices.
 
 Core Features & Architecture
 This application is built using a microservices architecture, where each core business function is handled by a separate, independently deployable service. This design improves scalability, resilience, and maintainability.
@@ -16,19 +17,14 @@ Order Service: Handles order creation and communicates with other services async
 
 Notification Service: A worker service that listens for events (like a new order) and simulates sending notifications.
 
-Message Broker (RabbitMQ): Decouples the services by handling asynchronous communication, ensuring that services like order creation can complete instantly without waiting for downstream tasks.
+Message Broker (RabbitMQ): Decouples the services by handling asynchronous communication.
 
-Database (PostgreSQL): A dedicated relational database for the User Service, demonstrating persistent data storage.
+Database (PostgreSQL): A dedicated relational database for the User Service for persistent data storage.
 
 Technology Stack
-Backend: Node.js, Express.js
-
-Containerization: Docker
-
-Orchestration: Kubernetes
-
-Database: PostgreSQL
-
-Messaging: RabbitMQ
-
-Version Control: Git & GitHub (using a feature-branch workflow)
+- Backend:           Node.js, Express.js
+- Containerization:    Docker
+- Orchestration:       Kubernetes
+- Database:            PostgreSQL
+- Messaging:           RabbitMQ
+- Version Control:     Git & GitHub
