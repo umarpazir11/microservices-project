@@ -1,0 +1,9 @@
+# pod-example.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-web-server
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
