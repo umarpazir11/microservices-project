@@ -5,10 +5,10 @@ name: Build and Deploy Application
 on:
   push:
     branches:
-      - main
+      - feature/ci-pipeline
   pull_request:
     branches:
-      - feature/ci-pipeline
+      - main
 
 jobs:
   build-docker-image:
