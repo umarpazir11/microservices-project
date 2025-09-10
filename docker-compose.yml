@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   api-gateway: # New Service
@@ -16,7 +15,17 @@ services:
 
   order-service:
     build: ./order-service
-    # No ports needed here either
+    environment: # Add environment variable for RabbitMQ
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq
+    depends_on: # Make sure it starts after RabbitMQ
+      - rabbitmq
+
+  notification-service: # New Notification Service
+    build: ./notification-service
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq
+    depends_on:
+      - rabbitmq
 
   db: # New PostgreSQL Database Service
     image: postgres:14
@@ -26,6 +35,12 @@ services:
       - POSTGRES_DB=mydatabase
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq: # New RabbitMQ Service
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672" # Management UI
+      - "5672:5672"   # AMQP protocol
 
 volumes: # New Volume for persistent data
   postgres_data:
