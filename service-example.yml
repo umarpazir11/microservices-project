@@ -1,0 +1,13 @@
+# service-example.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web-server-service
+spec:
+  selector:
+    app: my-web-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
